@@ -145,19 +145,35 @@ void test_merge_sort_chars() {
 
 int main(int argc, char* argv[argc+1]) {
     if (argc > 1) {
-        double list[argc-1];
-        for (size_t i = 0; argv[i+1]; ++i) {
-            list[i] = strtod(argv[i+1], 0);
-            printf("%.2f ", list[i]);
-        }
-        printf("\n");
+        if (strtod(argv[1], 0)) {
+            double list[argc-2];
+            for (size_t i = 0; argv[i+2]; ++i) {
+                list[i] = strtod(argv[i+2], 0);
+                printf("%.2f ", list[i]);
+            }
+            printf("\n");
 
-        msort_doubles(list, argc-1);
+            msort_doubles(list, argc-2);
 
-        for (size_t i = 0; i < argc-1; ++i) {
-            printf("%.2f ", list[i]);
+            for (size_t i = 0; i < argc-2; ++i) {
+                printf("%.2f ", list[i]);
+            }
+            printf("\n");
+        } else {
+            char list[argc-2];
+            for (size_t i = 0; argv[i+2]; ++i) {
+                list[i] = *argv[i+2];
+                printf("%c ", list[i]);
+            }
+            printf("\n");
+
+            msort_chars(list, argc-2);
+
+            for (size_t i = 0; i < argc-2; ++i) {
+                printf("%c ", list[i]);
+            }
+            printf("\n");
         }
-        printf("\n");
     } else {
         test_merge_sort_doubles();
         test_merge_sort_chars();
